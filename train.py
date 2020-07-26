@@ -1,9 +1,9 @@
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import plot_confusion_matrix
 import matplotlib.pyplot as plt
 import json
 import os
 import numpy as np
+import catboost as cat
 
 # Read in data
 X_train = np.genfromtxt("data/train_features.csv")
@@ -13,9 +13,8 @@ y_test = np.genfromtxt("data/test_labels.csv")
 
 
 # Fit a model
-depth = 6
-clf = RandomForestClassifier(max_depth=depth)
-clf.fit(X_train,y_train)
+clf = cat.CatBoostClassifier()
+clf.fit(X_train, y_train)
 
 acc = clf.score(X_test, y_test)
 print(acc)
